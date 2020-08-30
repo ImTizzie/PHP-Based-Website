@@ -2,7 +2,7 @@
 
 <!-- HEAD section ............................................................................ -->
 <head>
-  <title> Xchel Diaz's Project 1 Checklist </title>
+  <title> Project 1: PHP-based Website </title>
 
   <!-- javascript functions -->
 
@@ -38,63 +38,43 @@
   function proc_csv ($filename, $delimiter, $quote, $columns_to_show) {
     # Open file and read the contents
     $file1 = fopen($filename, "r") or die("Couldn't open that file!");
-    $pattern = "/((\r?\n)|(\r\n?))/";
-    $result = fgets($file1, filesize($filename));
-    echo $result;
-    echo "<br>";
-    while(!feof($filename)) {
-    	$result = fgets($file1, filesize($filename));
+
+    #Creates a default regex pattern and replaces both the default delimiter and quote with the parameters.
+    $pattern = "/,(?=([^\"]*\"[^\"]*\")*[^\"]*$)/";
+    $pattern = str_replace (",", $delimiter, $pattern);
+    $pattern = str_replace("\"", $quote, $pattern);
+
+    echo "$filename > [ $delimiter : $quote ] > $pattern";
+
+    echo "<table  border=\"1\">\n";
+
+    while(!feof($file1)) {
+
+    	$result = fgets($file1);
     	$component = preg_split($pattern, $result);
+
     	$column = 0;
+
+    	echo "<tr>\n";
+
     	foreach($component as $value) {
     		$column++;
-    		echo $value;
+    		echo "	<td> ".$value." </td>\n";
     	}
-    	echo "<br>";
+    	
+    	echo "</tr>\n";
     }
     fclose($filename);
-
-    #echo "<table  border=\"1\">\n";
-    #echo "</table>\n<p/>";
   }
 
-   echo "<h1> Xchel's Project 1 Testing Ground </h1>\n";
-   
-   echo "<h2> 1. CSV File Processor </h2>\n";
-
-   # FILE access 
-   $handle = fopen("data.dat","r") or die("Cannot open data.dat");
-
-   echo "<table  border=\"1\">\n";
-
-   while ($data = fgets($handle)) {
-        echo "<tr>\n";
-        $data_cols = preg_split('/,/',$data);
-        for ($k=0; $k<count($data_cols); ++$k) {
-            echo "  <td> ".$data_cols[$k]." </td>\n";
-        }
-        echo "</tr>\n";
-   }
-
-   fclose($handle);
-
-   echo "</table>\n<p/>";
-
-   # example calls
-   proc_csv("testFile.csv",",","\"", "ALL");
-   #proc_csv("data.dat",",","\"", "1:3:4:7");
-   #proc_csv("test.csv",",","\"", "ALL");
-
-# output would be formatted HTML code (table), that will be embedded where the above call is made in the PHP file.
-
-   echo "<h2> 2. Simplified Wikitext </h2>\n";
-   
-   echo "<h2> 3. Interactive Gallery </h2>\n";
-   
-   echo "<h2> 4. Search </h2>\n";
-
-   # FILE access 
-   
+   proc_csv( "dat2-doublequote-colon.csv" , ":"  , "\\\"" , "ALL" );
+   proc_csv( "dat2-doublequote-comma.csv" , ","  , "\'"   , "ALL" );
+   proc_csv( "dat2-doublequote-tab.csv"   , "\t" , "\\\"" , "ALL" );
+   proc_csv( "dat2-singlequote-tab.csv"   , "\t" , "\'"   , "ALL" );
+   proc_csv( "dat-doublequote-bar.csv"    , "\|"  , "\\\"" , "ALL" );
+   proc_csv( "dat-doublequote-comma.csv"  , ","  , "\\\"" , "ALL" );
+   proc_csv( "dat-doublequote-tab.csv"    , "\t" , "\\\"" , "ALL" );
+   proc_csv( "dat-singlequote-colon.csv"  , ":"  , "\'"   , "ALL" );
 
 ?>
 

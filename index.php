@@ -333,6 +333,42 @@
     	<?php
     }
 
+    function wikitext_bold_italic($line) {
+    	$line = substr($line, 5);
+    	$line = rtrim(chop($line), "'''''");
+    	echo "<b><i>$line</b></i>";
+    }
+    function wikitext_bold($line) {
+    	$line = substr($line, 3);
+    	$line = rtrim(chop($line), "'''");
+    	echo "<b>$line</b>";
+    }
+    function wikitext_italic($line) {
+    	$line = substr($line, 2);
+    	$line = rtrim(chop($line), "''");
+    	echo "<i>$line</i>";
+    }
+
+    function wikitext_named_url($line) {
+    	$line = substr($line, 1);
+    	$line = rtrim(chop($line), "]");
+    	$url = (preg_split("/\s(?=([^\"]*\"[^\"]*\")*[^\"]*$)/", $line))[0];
+    	$name = substr($line, strlen($url));
+    	?>
+    	<html>
+    	<a href="<?php echo $url; ?>"><?php echo $name; ?></a>
+    	</html>
+    	<?php
+    }
+
+    function wikitext_url($line) {
+    	?>
+    	<html>
+    	<a href="<?php echo $line; ?>"><?php echo $line; ?></a>
+    	</html>
+    	<?php
+    }
+
   	function wikitext_line_check($line) {
   		if(startsWith($line, "=") and endsWith($line, "=")) {
   			wikitext_header($line);
@@ -356,6 +392,16 @@
   			wikitext_color($line);
   		} else if (startsWith($line, "{{Font")) {
   			wikitext_highlight($line);
+  		} else if (startsWith($line, "'''''")) {
+  			wikitext_bold_italic($line);
+  		} else if (startsWith($line, "'''")) {
+  			wikitext_bold($line);
+  		} else if (startsWith($line, "''")) {
+  			wikitext_italic($line);
+  		} else if (startsWith($line, "[http")) {
+  			wikitext_named_url($line);
+  		} else if (startsWith($line, "http")) {
+  			wikitext_url($line);
   		} else {
   			echo "$line";
   		}

@@ -290,18 +290,47 @@
     	$components = preg_split("/\|(?=([^\"]*\"[^\"]*\")*[^\"]*$)/", $line);
     	switch (sizeof($components)) {
     		case 1:
-    			echo "$components[0]";
+    			?>
+    			<html>
+    			<img src="<?php echo $components[0]; ?>" />
+    			</html>
+    			<?php
     			break;
     		case 2:
-    			echo "$components[0]";
-    			echo ":::";
     			if(sizeof(preg_split("/\=(?=([^\"]*\"[^\"]*\")*[^\"]*$)/", $components[1])) === 2) {
     				$components[1] = (preg_split("/\=(?=([^\"]*\"[^\"]*\")*[^\"]*$)/", $components[1]))[1];
     			}
-    			echo "$components[1]";
+    			$components[1] = rtrim($components[1], "px");
+    			?>
+    			<html>
+    			<img src="<?php echo $components[0]; ?>" width="<?php echo $components[1]; ?>" height="<?php echo $components[1]; ?>" />
+    			</html>
+    			<?php
         		break;
 		}
     	echo "<br>";
+    }
+
+    function wikitext_color($line) {
+    	$line = rtrim(chop($line), "}}");
+    	$components = preg_split("/\|(?=([^\"]*\"[^\"]*\")*[^\"]*$)/", $line);
+    	$components[1] = "color:" . $components[1];
+    	?>
+    	<html>
+    	<p style="<?php echo $components[1]; ?>"><?php echo $components[2]; ?></p>
+    	</html>
+    	<?php
+    }
+
+    function wikitext_highlight($line) {
+    	$line = rtrim(chop($line), "}}");
+    	$components = preg_split("/\|(?=([^\"]*\"[^\"]*\")*[^\"]*$)/", $line);
+    	$components[2] = "background-color:" . $components[2];
+    	?>
+    	<html>
+    	<mark style="<?php echo $components[2]; ?>"><?php echo $components[3]; ?></mark>
+    	</html>
+    	<?php
     }
 
   	function wikitext_line_check($line) {
@@ -323,6 +352,10 @@
   			wikitext_desc_list($line);
   		} else if (startsWith($line, "[[File")) {
   			wikitext_image($line);
+  		} else if (startsWith($line, "{{color")) {
+  			wikitext_color($line);
+  		} else if (startsWith($line, "{{Font")) {
+  			wikitext_highlight($line);
   		} else {
   			echo "$line";
   		}

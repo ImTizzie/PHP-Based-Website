@@ -369,6 +369,83 @@
     	<?php
     }
 
+    function wikitext_print($line) {
+    	if(strpos($line, "'''''") != false) {
+    		$backLine = substr($line, 0, strpos($line, "'''''"));
+    		$frontLine = substr($line, strlen($backLine) + strlen("'''''"));
+    		$middleLine = "'''''" . substr($frontLine, 0, strpos($frontLine, "'''''")) . "'''''";
+    		$frontLine = substr($line, strlen($backLine) + strlen($middleLine));
+    		wikitext_line_check($backLine);
+    		wikitext_line_check($middleLine);
+    		wikitext_line_check($frontLine);
+    	} else if (strpos($line, "'''") != false) {
+    		$backLine = substr($line, 0, strpos($line, "'''"));
+    		$frontLine = substr($line, strlen($backLine) + strlen("'''"));
+    		$middleLine = "'''" . substr($frontLine, 0, strpos($frontLine, "'''")) . "'''";
+    		$frontLine = substr($line, strlen($backLine) + strlen($middleLine));
+    		wikitext_line_check($backLine);
+    		wikitext_line_check($middleLine);
+    		wikitext_line_check($frontLine);
+    	} else if (strpos($line, "''") != false) {
+    		$backLine = substr($line, 0, strpos($line, "''"));
+    		$frontLine = substr($line, strlen($backLine) + strlen("''"));
+    		$middleLine = "''" . substr($frontLine, 0, strpos($frontLine, "''")) . "''";
+    		$frontLine = substr($line, strlen($backLine) + strlen($middleLine));
+    		wikitext_line_check($backLine);
+    		wikitext_line_check($middleLine);
+    		wikitext_line_check($frontLine);
+    	} else if (strpos($line, "[[File") != false) {
+    		$backLine = substr($line, 0, strpos($line, "[["));
+    		$frontLine = substr($line, strlen($backLine) + strlen("[["));
+    		$middleLine = "[[" . substr($frontLine, 0, strpos($frontLine, "]]")) . "]]";
+    		$frontLine = substr($line, strlen($backLine) + strlen($middleLine));
+    		wikitext_line_check($backLine);
+    		wikitext_line_check($middleLine);
+    		wikitext_line_check($frontLine);
+    	} else if (strpos($line, "{{color") != false) {
+    		$backLine = substr($line, 0, strpos($line, "{{"));
+    		$frontLine = substr($line, strlen($backLine) + strlen("{{"));
+    		$middleLine = "{{" . substr($frontLine, 0, strpos($frontLine, "}}")) . "}}";
+    		$frontLine = substr($line, strlen($backLine) + strlen($middleLine));
+    		wikitext_line_check($backLine);
+    		wikitext_line_check($middleLine);
+    		wikitext_line_check($frontLine);
+    	} else if (strpos($line, "{{Font") != false) {
+    		$backLine = substr($line, 0, strpos($line, "{{"));
+    		$frontLine = substr($line, strlen($backLine) + strlen("{{"));
+    		$middleLine = "{{" . substr($frontLine, 0, strpos($frontLine, "}}")) . "}}";
+    		$frontLine = substr($line, strlen($backLine) + strlen($middleLine));
+    		wikitext_line_check($backLine);
+    		wikitext_line_check($middleLine);
+    		wikitext_line_check($frontLine);
+    	} else if (strpos($line, "[http") != false) {
+    		$backLine = substr($line, 0, strpos($line, "["));
+    		$frontLine = substr($line, strlen($backLine) + strlen("["));
+    		$middleLine = "[" . substr($frontLine, 0, strpos($frontLine, "]")) . "]";
+    		$frontLine = substr($line, strlen($backLine) + strlen($middleLine));
+    		wikitext_line_check($backLine);
+    		wikitext_line_check($middleLine);
+    		wikitext_line_check($frontLine);
+    	} else if (strpos($line, "http") != false) {
+    		$backLine = substr($line, 0, strpos($line, "http"));
+    		$curPos = strlen($backLine);
+    		$strArray = str_split($line);
+    		for($i = $curPos; $i < sizeof($strArray); $i++) {
+    			if ($line[$i] === " ") {
+    				break;
+    			}
+    			$curPos++;
+    		}
+    		$middleLine = substr($line, strlen($backLine), $curPos - strlen($backLine));
+    		$frontLine = substr($line, strlen($backLine) + strlen($middleLine));
+    		wikitext_line_check($backLine);
+    		wikitext_line_check($middleLine);
+    		wikitext_line_check($frontLine);
+    	} else {
+    		echo "$line";
+    	}
+    }
+
   	function wikitext_line_check($line) {
   		if(startsWith($line, "=") and endsWith($line, "=")) {
   			wikitext_header($line);
@@ -403,7 +480,7 @@
   		} else if (startsWith($line, "http")) {
   			wikitext_url($line);
   		} else {
-  			echo "$line";
+  			wikitext_print($line);
   		}
   	}
 

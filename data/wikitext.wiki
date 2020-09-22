@@ -1,0 +1,118 @@
+
+= Headings =
+
+= Heading 1 =
+== Heading 2 ==
+=== Heading 3 ===
+==== Heading 4 ====
+===== Heading 5 =====
+====== Heading 6 ======
+
+= Horizontal rule =
+
+
+= Line breaks (and paragraphs) =
+
+A single newline here
+has no effect on the layout.
+
+But an empty line starts a new paragraph, 
+or ends a list or an indented part.
+
+= Indent text (note: no Outdent needed) =
+
+Indentation as used on talk pages:
+
+:Each colon at the start of a line
+::causes the line to be indented by three more character positions.
+:::(The indentation persists
+so long as no carriage return or line break is used.)
+:::Repeat the indentation at any line break.
+::::Use an extra colon for each response.
+:::::And so forth ...
+::::::And so on ...
+
+= Blockquote (see Template:Quote) =
+
+{{Quote |text=Quoted material.  }}
+
+{{Quote |text=Quoted material.  |author=First M. Last }}
+
+= Unordered lists =
+
+* Item1
+* Item2
+* Item3
+* Item4
+** Sub-item 4 a)
+*** Sub-item 4 a) 1.
+**** Sub-item 4 a) 1. i)
+**** Sub-item 4 a) 1. ii)
+** Sub-item 4 b)
+* Item5
+
+= Ordered lists =
+
+# Item1
+# Item2
+# Item3
+# Item4
+## Sub-item 1
+### Sub-sub-item
+#### Sub-sub-sub-item
+## Sub-item 2
+# Item5
+
+= Description lists =
+
+; Term : Definition1
+
+; Term
+: Definition1
+: Definition2
+: Definition3
+: Definition4
+
+= Italics and bold =
+
+To ''italicize text'', put two consecutive apostrophes on each side of it.
+
+Three apostrophes each side will '''bold the text'''.
+
+Five consecutive apostrophes on each side (two for italics plus three for bold) produces '''''bold italics'''''.
+
+= Links =
+
+
+== Named links ==
+
+[http://www.wikipedia.org Wikipedia]
+
+== URL ==
+http://www.wikipedia.org
+
+
+== Images ==
+
+== Single picture ==
+
+A picture: [[File:wiki.png]]
+
+== Single picture with size ==
+
+Either of the two would be fine:
+
+A picture: [[File:wiki.png|px=100]]
+
+OR
+
+A picture: [[File:wiki.png|100px]]
+
+
+= Coloring text =
+
+I will change the color in {{color|blue|the middle part of}} this sentence.
+
+= Highlighting text =
+
+This is how to {{Font color||yellow|highlight part of a sentence}}.

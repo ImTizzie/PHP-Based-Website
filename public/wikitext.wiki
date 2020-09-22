@@ -1,0 +1,28 @@
+= Helpful Resources =
+
+With not very much time to implement the first feature of this website, yet having absolutely no knowledge of PHP and very lttle non-functioning expertise in CSS and HTML, I quickly had to find resources to help me develop functional code in a short amount of time. Fortunately, this is something that I've much experience with, as a fourth-year Computer Science student. Below, I'll provide some of the best general resources to help with situations where you may find yourself needing immediate assistance developing code for a language you've very little experience with.
+
+
+==Official Documentation==
+
+{{Quote |text=Documentation is a love letter that you write to your future self.  |author=Damian Conway }}
+
+You absolutely cannot go wrong with the official documentation for the language you are developing with. Although the amount of help it provides may vary (some documentation is bare-bones), it will always be a great resource due to the depth of information that official documentation is able to provide on any functions, types of variables, etc. that you may want to utilize. It allows developers to understand what is going on behind-the-scenes in the black boxes that are the higher-level functions they use all the time. In short, you can never really go wrong with the documentation and it should always be the first thing to check when additional information is necessary or something is being problematic.
+
+==Online Courses/Tutorials==
+
+{{Quote |text=Online courses have seriously helped fill in the gap for my programming courses.  |author=Xchel Diaz |source= Wikitext.wiki }}
+
+You can take the greatest computer science course on a specific language in the world, but small lapses or gaps in your knowledge are bound to happen, as it's just a part of learning a language. Although you may not be able to retake a course, you can always check out online coding programs/courses and tutorials to help brush up on anything you may have forgotten. Of course, you can always use a program/course like this to start learning, as they will always go through the very basic building blocks of any language they are teaching. All in all, they are an amazing resource for brushing up on your coding and to start learning a new language. Below are some good sources:
+
+* Codecademy
+* W3Schools
+* CodingDojo
+* Leetcode
+* Coursera
+
+==Code Sandboxes==
+
+{{Quote |text=In a code sandbox, I can experiment and destroy without messing up the rest of my code.  |author=Xchel Diaz |source= Wikitext.wiki }}
+
+It's absolutely terrifying to implement a new technique, data structure, or even a simple variable to your code during development. What if it breaks the rest of your code? What if it disrupts the functionality of a previously implemented feature? Ideally, code should be functional independently of one another, but sometimes it isn't possible or hasn't been done so yet. For situations like these, a code sandbox is incredibly ideal, allowing developers to write code to test prior to inserting it into their own program. Not all languages have an online code sandbox, but if a language supports it, it's beneficial to make use of it whenever implementing finicky code.
